@@ -82,6 +82,9 @@ def to_zeck(fib_str):
         new_fib_str = "".join(fib_list) ## now multiple passes
 
     new_fib_str = trim_leading_zeros(new_fib_str) 
+    
+    ## Set 0'th digit to 0! Should really never be 1!
+    new_fib_str = new_fib_str[:-1] + "0"
 
     if not(test_equivalency_two_fibs(fib_str, new_fib_str)):
         print("NOT GOOD ZECK CONVERSION BROKEN")
@@ -217,6 +220,84 @@ def addition_algo(fib_str1, fib_str2):
 
     return sum_fib_str
 
+def un_zeck(fib_list, index):
+    fib_list[index] -= 1
+    fib_list[index+1] += 1
+    fib_list[index+2] += 1
+    return fib_list
+
+def setup_sub_overlap(fib_list1, fib_list2):
+    ## lists are of equal length, list 1 of greater value
+    ## idea - if top number has 1 and bot has 0, push 1 down
+    ## keep going until complete overlap? One pass?
+
+    for i in range(len(fib_list1)-2):
+        if fib_list2[i] == 0 and fib_list1[i] == 1:
+            if fib_list1[i+1] == 0:
+                ## NO NEED TO UNZECK if next val is 1, just use that! leave this as "free val"
+                print("NEED TO UNZECK", i, fib_list1)
+                un_zeck(fib_list1, i)
+        elif fib_list2[i] == 1 and fib_list1[i] == 0:
+            print("SHOULD BE IMPOSSIBLE???")
+        
+    return fib_list1, fib_list2
+        
+def subtract_fib_lists(fib_list1, fib_list2):
+    ## assumes same size, lined up for complete overlap
+    sub_list = []
+    for i in range(len(fib_list1)):
+        new_val = fib_list1[i] - fib_list2[i] 
+        sub_list.append(new_val)
+    return sub_list
+
+def subtraction_algo(fib_str1, fib_str2):
+    correct_dec = compute_cheat_subtraction(fib_str1, fib_str2)
+
+    fib_str1 = to_zeck(fib_str1)
+    fib_str2 = to_zeck(fib_str2)
+
+    fib_list1 = list(map(int, list(fib_str1)))
+    fib_list2 = list(map(int, list(fib_str2)))
+
+    size_1 = len(fib_list1)
+    size_2 = len(fib_list2)
+
+    if len(fib_list1) < len(fib_list2):
+        fib_list1, fib_list2 = pad_with_zeros(fib_list1, fib_list2)
+    elif len(fib_list1) > len(fib_list2):
+        fib_list2, fib_list1 = pad_with_zeros(fib_list2, fib_list1)
+
+    fib_list1, fib_list2 = setup_sub_overlap(fib_list1, fib_list2)
+    print("After setup")
+    print(fib_list1)
+    print(fib_list2)
+
+    sub_fib_list = subtract_fib_lists(fib_list1, fib_list2)
+    print("sub fib list", sub_fib_list)
+
+    sub_fib_str = "".join(list(map(str, sub_fib_list)))
+    sub_fib_str = simplify_twos(sub_fib_str)
+    sub_value = fib_to_dec(sub_fib_str)
+    print(f"Sub fib {sub_fib_str} for value of {sub_value}")
+
+    if sub_value != correct_dec:
+        print("FAILURE not EQUAL ADDITION FAILED!")
+
+    return sub_fib_str
+
+
+def compute_cheat_subtraction(fib_num1, fib_num2):
+    ## Assume num1 is bigger!
+    dec1 = fib_to_dec(fib_num1)
+    dec2 = fib_to_dec(fib_num2)
+    temp = dec1 - dec2 
+    print("Subtraction:")
+    print(" ",fib_num1)
+    print("- ", fib_num2)
+    print("--------------")
+    print(temp)
+    return temp
+
 
 def compute_cheat_addition(fib_num1, fib_num2):
     ## "Cheat" method
@@ -253,7 +334,7 @@ fib_to_dec(ans)
 ## ie 1111111 + 11111111 ----> a lot of applying Jeffrey's formula
 
 five  = "100000"
-seven = "101000"
+seven = "10100"
 
 dec_to_fib(5)
 dec_to_fib(7)
@@ -265,3 +346,6 @@ simplify_twos(init_twos)
 awk = "1101011010111110"
 awker = "011011000110111"
 addition_algo(awk, awker)
+
+subtraction_algo(five, seven)
+subtraction_algo(awk, awker)

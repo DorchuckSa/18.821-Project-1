@@ -40,6 +40,7 @@ class TestFibClass(unittest.TestCase):
     
     def test_mul(self):
         ## runs 0 to 20 in 0.86 seconds
+        ## runs 0 to 50 in 11.5 seconds
         for bot in range(50):
             for top in range(50):
                 first_fib = fib_class.dec_to_fib(top)

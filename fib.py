@@ -97,7 +97,6 @@ def to_zeck(fib_str):
 
 
 def dec_to_fib_helper(decimal_num):
-    print("called with", decimal_num)
     fib_list = []
     index = 0 
     if decimal_num == 0:
@@ -126,8 +125,6 @@ def dec_to_fib_helper(decimal_num):
 def dec_to_fib(decimal_num):
     ## Have to brute force? 
     ## Recursive?  Inclined to think there's a recursive way to do this
-
-    # fib_list[len(fib_list)-size:] = back_half ## set the back half of fib_list!
     fib_list = dec_to_fib_helper(decimal_num)
 
     fib_str = "".join(fib_list)

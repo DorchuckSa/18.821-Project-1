@@ -430,9 +430,11 @@ def dec_to_fib(decimal_num):
 
 
 def main():
-    seven = FibonacciNumberBase("11111111111111111111111111")
+    seven = FibonacciNumberBase("11111111111111111111111111") ## Create a FibNumber from a string of 1s and 0s
     five = FibonacciNumberBase("101011111111101")
-    # twelve = (dec_to_fib(12))
+
+
+    # twelve = (dec_to_fib(12))  ## Create a FibNumber from decimal
     # three = (dec_to_fib(3))
     # temp = twelve * three 
 

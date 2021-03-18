@@ -6,3 +6,9 @@ Implements:
   - Linear Time Addition
   - Linear Time Subtraction
   - O(n^2) Time Multiplication
+
+Usage:
+  - python3 fib_class.py: Runs whatever is contained in the main() function of fib_class.py
+        * Can modify main() to run different addition/multiplication/subtraction questions for fun
+
+  - python3 tests.py: Runs exhaustive tests on all 3 algorithms. 

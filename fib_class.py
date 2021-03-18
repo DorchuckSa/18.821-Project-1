@@ -308,14 +308,32 @@ class FibonacciNumberBase:
         if self.fib_list[len(self.fib_list)-2] == 1:
             S = S + other
         
+        temps = []
+        # for i in range(2, len(self.fib_list)):
+        #     temp = rPrev + rCur
+        #     # print('temp is', temp)
+
+        #     if self.fib_list[len(self.fib_list)-i-1] == 1:
+        #         S = S + temp
+        #     rPrev = rCur
+        #     rCur = temp
+
+        to_sum = []
+        print("\nCOMPUTING F_i * C")
         for i in range(2, len(self.fib_list)):
             temp = rPrev + rCur
-            # print('temp is', temp)
-
+            temps.append(temp)
             if self.fib_list[len(self.fib_list)-i-1] == 1:
-                S = S + temp
+                to_sum.append(temp)
+        
             rPrev = rCur
             rCur = temp
+
+        print("\nCOMPUTING Sum S from b_i * F_i * C")
+        for val in to_sum:
+            S = S + val
+
+
 
         print()
 
@@ -412,15 +430,15 @@ def dec_to_fib(decimal_num):
 
 
 def main():
-    seven = FibonacciNumberBase("11010110110110101")
-    five = FibonacciNumberBase("100010111111011101")
+    seven = FibonacciNumberBase("11111111111111111111111111")
+    five = FibonacciNumberBase("101011111111101")
     # twelve = (dec_to_fib(12))
     # three = (dec_to_fib(3))
     # temp = twelve * three 
 
-    twentytwo = (dec_to_fib(22))
-    thirtyone = (dec_to_fib(31))
-    temp = twentytwo + thirtyone
+    # a = (dec_to_fib(532523))
+    # b = (dec_to_fib(31))
+    temp = seven + five
 
     print(temp)
 

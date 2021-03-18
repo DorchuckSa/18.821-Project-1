@@ -9,19 +9,19 @@ class TestFibClass(unittest.TestCase):
     def test_fib_to_dec(self):
         pass
 
-    # def test_add(self):
-    #     ## runs 0 to 20 in 0.24 seconds
-    #     ## runs 0 to 100 in 2.971 seconds
-    #     ## runs 0 to 500 in 83.810 seconds (with prints)
-    #     ## runs 0 to 500 in 57.382 seconds (with no prints)
-    #     for bot in range(500):
-    #         for top in range(500):
-    #             first_fib = fib_class.dec_to_fib(top)
-    #             second_fib = fib_class.dec_to_fib(bot)
-    #             fib_sol = first_fib + second_fib 
-    #             real_sol = top + bot
-    #             ## Ensure addition works
-    #             self.assertEqual(fib_sol.dec, real_sol)
+    def test_add(self):
+        ## runs 0 to 20 in 0.24 seconds
+        ## runs 0 to 100 in 2.971 seconds
+        ## runs 0 to 500 in 83.810 seconds (with prints)
+        ## runs 0 to 500 in 57.382 seconds (with no prints)
+        for bot in range(500):
+            for top in range(500):
+                first_fib = fib_class.dec_to_fib(top)
+                second_fib = fib_class.dec_to_fib(bot)
+                fib_sol = first_fib + second_fib 
+                real_sol = top + bot
+                ## Ensure addition works
+                self.assertEqual(fib_sol.dec, real_sol)
                 
     # def test_sub(self):
         ## runs 0 to 20 in 0.025 seconds
@@ -38,16 +38,23 @@ class TestFibClass(unittest.TestCase):
         #         ## Ensure subtraction works
         #         self.assertEqual(fib_sol.dec, real_sol)
     
-    def test_mul(self):
-        ## runs 0 to 20 in 0.86 seconds
-        ## runs 0 to 50 in 11.5 seconds
-        for bot in range(50):
-            for top in range(50):
-                first_fib = fib_class.dec_to_fib(top)
-                second_fib = fib_class.dec_to_fib(bot)
-                fib_sol = first_fib * second_fib 
-                real_sol = top * bot
-                ## Ensure multiplication works
-                self.assertEqual(fib_sol.dec, real_sol)        
+    # def test_mul(self):
+    #     ## O(n^3) method
+    #     ## runs 0 to 20 in 0.86 seconds
+    #     ## runs 0 to 50 in 11.5 seconds
+
+    #     ## Faster method:
+    #     ## runs 0 to 50 in 3.809 seconds
+    #     ## runs 0 to 100 in 21.335 seconds
+    #     for bot in range(100):
+    #         for top in range(100):
+    #             first_fib = fib_class.dec_to_fib(top)
+    #             second_fib = fib_class.dec_to_fib(bot)
+    #             fib_sol = first_fib * second_fib 
+    #             real_sol = top * bot
+    #             ## Ensure multiplication works
+    #             self.assertEqual(fib_sol.dec, real_sol)        
+
+    
 if __name__ == '__main__':
     unittest.main()
